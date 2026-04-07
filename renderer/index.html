@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Translate</title>
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <main>
+      <button id="translateBtn" class="btn-primary" disabled>
+        Traduire la sélection
+      </button>
+
+      <div class="result-container">
+        <div id="loader" class="hidden">
+          <div class="spinner"></div>
+          <p>Traduction en cours...</p>
+        </div>
+        <div id="resultText"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="promptModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Modifier le Prompt</h2>
+      <textarea id="promptInput" rows="4"></textarea>
+      <div class="modal-actions">
+        <button id="cancelPromptBtn" class="btn-secondary">Annuler</button>
+        <button id="savePromptBtn" class="btn-primary">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
