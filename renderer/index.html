@@ -12,16 +12,36 @@
 <body>
   <div class="container">
     <main>
-      <button id="translateBtn" class="btn-primary" disabled>
-        Traduire la sélection
-      </button>
-
-      <div class="result-container">
-        <div id="loader" class="hidden">
-          <div class="spinner"></div>
-          <p>Traduction en cours...</p>
+      <div class="btn-row">
+        <button id="translateBtn" class="btn-primary" disabled>
+          Traduire
+        </button>
+        <div class="btn-group">
+          <button id="storeBtn" class="btn-store" disabled>
+            Stocker
+          </button>
+          <button id="sendBtn" class="btn-send" disabled>
+            Envoyer
+          </button>
         </div>
-        <div id="resultText"></div>
+      </div>
+
+      <div class="content-row">
+        <div class="result-container">
+          <div id="loader" class="hidden">
+            <div class="spinner"></div>
+            <p>Traduction en cours...</p>
+          </div>
+          <div id="resultText"></div>
+        </div>
+
+        <div id="storedPanel" class="stored-panel hidden">
+          <div class="stored-header">
+            <span>Images stockées</span>
+            <button id="clearStoredBtn" class="btn-clear" title="Vider">✕</button>
+          </div>
+          <div id="storedImages" class="stored-images"></div>
+        </div>
       </div>
     </main>
   </div>

@@ -2,6 +2,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
     translate: () => ipcRenderer.invoke('translate'),
+    captureZone: () => ipcRenderer.invoke('capture-zone'),
+    translateMultiple: (images) => ipcRenderer.invoke('translate-multiple', images),
     hasSavedZone: () => ipcRenderer.invoke('has-saved-zone'),
     getLastTranslation: () => ipcRenderer.invoke('get-last-translation'),
     getFontSize: () => ipcRenderer.invoke('get-font-size'),

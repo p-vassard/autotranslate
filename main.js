@@ -1,7 +1,7 @@
-const { app, BrowserWindow, Menu, ipcMain, desktopCapturer } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, desktopCapturer, nativeImage } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
-const { translateImage } = require('./services/gemini');
+const { translateImage, translateMultipleImages } = require('./services/gemini');
 const { captureScreenZone } = require('./services/capture');
 
 // Initialize store
@@ -172,4 +172,42 @@ ipcMain.handle('get-prompt-size', () => {
 
 ipcMain.on('save-prompt-size', (event, size) => {
     store.set('promptSize', size);
+});
+
+// Capture zone without translating — returns base64 image
+ipcMain.handle('capture-zone', async () => {
+    try {
+        const bounds = store.get('captureBounds');
+        if (!bounds) throw new Error('Aucune zone sélectionnée');
+
+        const base64Image = await captureScreenZone(bounds);
+        return { success: true, base64: base64Image };
+    } catch (error) {
+        console.error(error);
+        return { success: false, error: error.message };
+    }
+});
+
+// Translate multiple stored images in one prompt
+ipcMain.handle('translate-multiple', async (event, base64Images) => {
+    try {
+        if (!base64Images || base64Images.length === 0) {
+            throw new Error('Aucune image stockée');
+        }
+
+        mainWindow.webContents.send('translation-started');
+
+        const userPrompt = store.get('prompt', 'Traduit et décompose ce texte');
+        const resultMarkdown = await translateMultipleImages(base64Images, userPrompt);
+
+        const { marked } = await import('marked');
+        const resultHTML = marked.parse(resultMarkdown);
+
+        store.set('lastTranslation', resultHTML);
+
+        return { success: true, text: resultHTML };
+    } catch (error) {
+        console.error(error);
+        return { success: false, error: error.message };
+    }
 });
