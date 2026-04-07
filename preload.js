@@ -9,5 +9,7 @@ contextBridge.exposeInMainWorld('api', {
     onZoneReady: (callback) => ipcRenderer.on('zone-ready', () => callback()),
     onAskForPrompt: (callback) => ipcRenderer.on('ask-for-prompt', (event, currentPrompt) => callback(currentPrompt)),
     savePrompt: (newPrompt) => ipcRenderer.send('save-prompt', newPrompt),
+    getPromptSize: () => ipcRenderer.invoke('get-prompt-size'),
+    savePromptSize: (size) => ipcRenderer.send('save-prompt-size', size),
     onTranslationStarted: (callback) => ipcRenderer.on('translation-started', () => callback())
 });

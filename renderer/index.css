@@ -190,8 +190,8 @@ main {
     background: var(--bg-color);
     padding: 20px;
     border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
+    width: max-content;
+    max-width: 95vw;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
@@ -211,9 +211,11 @@ textarea {
     padding: 10px;
     border-radius: 8px;
     font-family: inherit;
-    resize: vertical;
+    resize: both;
     margin-bottom: 16px;
     outline: none;
+    max-width: 90vw;
+    max-height: 80vh;
 }
 
 textarea:focus {

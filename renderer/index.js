@@ -35,6 +35,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     const savePromptBtn = document.getElementById('savePromptBtn');
     const cancelPromptBtn = document.getElementById('cancelPromptBtn');
 
+    window.api.getPromptSize().then(size => {
+        if (size && size.width && size.height) {
+            promptInput.style.width = size.width;
+            promptInput.style.height = size.height;
+        }
+    });
+
+    promptInput.addEventListener('mouseup', () => {
+        window.api.savePromptSize({
+            width: promptInput.style.width,
+            height: promptInput.style.height
+        });
+    });
+
     window.api.onAskForPrompt((currentPrompt) => {
         promptInput.value = currentPrompt;
         promptModal.classList.remove('hidden');

@@ -165,3 +165,11 @@ ipcMain.handle('get-last-translation', () => {
 ipcMain.on('save-prompt', (event, newPrompt) => {
     store.set('prompt', newPrompt);
 });
+
+ipcMain.handle('get-prompt-size', () => {
+    return store.get('promptSize', { width: '350px', height: '150px' });
+});
+
+ipcMain.on('save-prompt-size', (event, size) => {
+    store.set('promptSize', size);
+});
