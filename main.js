@@ -138,7 +138,7 @@ ipcMain.handle('translate', async () => {
 
         // 3. Convertir en HTML
         const { marked } = await import('marked');
-        const resultHTML = marked.parse(resultMarkdown);
+        const resultHTML = marked.parse(resultMarkdown, { breaks: true });
 
         store.set('lastTranslation', resultHTML);
 
@@ -201,7 +201,7 @@ ipcMain.handle('translate-multiple', async (event, base64Images) => {
         const resultMarkdown = await translateMultipleImages(base64Images, userPrompt);
 
         const { marked } = await import('marked');
-        const resultHTML = marked.parse(resultMarkdown);
+        const resultHTML = marked.parse(resultMarkdown, { breaks: true });
 
         store.set('lastTranslation', resultHTML);
 
