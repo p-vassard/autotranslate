@@ -3,6 +3,8 @@
 Une application Windows permettant de sélectionner une zone de l'écran et de traduire le texte qui s'y trouve à l'aide de l'API Google Gemini. 
 Le projet est développé avec Electron, et inclut une authentification Google OAuth.
 
+![alt text](screenshot.png)
+
 ## Fonctionnalités
 
 - Sélection de zone à l'écran via un overlay transparent
